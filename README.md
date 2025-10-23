@@ -11,6 +11,9 @@ Modern ve kullanıcı dostu market listesi uygulaması. Ürünlerinizi virgülle
 - 🔄 **İşlem Butonları** - Tümünü sıfırla, tamamlananları sil
 - 💾 **Local Storage** - Liste otomatik kaydedilir
 
+##Demo İçin
+https://ness246.github.io/Listify/
+
 ## 🚀 Hızlı Başlangıç
 
 ### Yöntem 1: GitHub Pages (Önerilen)
