@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LISTIFY.</title>
+    <title>Listify.</title>
+    
+    <!-- Favicon (Sekme Logosu) -->
+    <link rel="icon" type="image/png" href="logo.png">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,25 +41,26 @@
         .header {
             background: linear-gradient(135deg, #170a27, #170a27);
             color: #ffffff;
-            padding: 25px 20px;
+            padding: 30px 20px;
             text-align: center;
             border-bottom: 1px solid #2d1b4e;
         }
 
         .header h1 {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 70px;
-            margin-bottom: 5px;
-            letter-spacing: 2px;
+            font-size: 62px;
+            margin-bottom: 10px;
+            letter-spacing: 3px;
             font-weight: 400;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         .header p {
             font-family: 'Bebas Neue', sans-serif;
             opacity: 0.9;
-            font-size: 18px;
+            font-size: 22px;
             font-weight: 400;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
         }
 
         .content {
@@ -101,13 +105,13 @@
         }
 
         .example {
-            background: #000000;
+            background: #2d1b4e;
             padding: 10px;
             border-radius: 8px;
             margin-top: 8px;
             font-size: 14px;
             color: #b8b8b8;
-            border: 1px solid #000000;
+            border: 1px solid #3d2a5c;
             font-weight: 300;
         }
 
@@ -140,12 +144,12 @@
         }
 
         .secondary-btn {
-            background: #611301;
+            background: #3d0c01;
             color: #ffffff;
         }
 
         .secondary-btn:hover {
-            background: #861a02;
+            background: #611301;
             transform: translateY(-2px);
         }
 
@@ -179,10 +183,10 @@
             display: flex;
             align-items: center;
             padding: 12px;
-            background: #037253;
+            background: #4c907d;
             margin-bottom: 8px;
             border-radius: 8px;
-            box-shadow: 0 2px 5px #4c907d00;
+            box-shadow: 0 2px 5px #4c907d70;
             animation: fadeIn 0.3s ease-in;
             cursor: pointer;
             transition: all 0.3s;
@@ -322,11 +326,11 @@
             }
             
             .header h1 {
-                font-size: 42;
+                font-size: 48px;
             }
             
             .header p {
-                font-size: 16px;
+                font-size: 18px;
             }
             
             textarea {
@@ -338,7 +342,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>Lıstıfy.</h1>
+            <h1>Listify.</h1>
             <p>Düzen, Basitçe.</p>
         </div>
 
@@ -359,22 +363,22 @@
                     Liste Oluştur
                 </button>
                 <button class="secondary-btn" onclick="listeyiTemizle()">
-                     Temizle
+                    🗑️ Temizle
                 </button>
             </div>
 
             <div class="liste-container">
-                <div class="liste-baslik"> Market Listeniz</div>
+                <div class="liste-baslik">📋 Market Listeniz</div>
                 <div id="listeSonuc" class="bos-liste">
                     Liste henüz oluşturulmadı...
                 </div>
                 
                 <div class="action-buttons">
                     <button class="secondary-btn action-btn" onclick="tumunuTemizle()">
-                         Tümünü Sıfırla
+                        🔄 Tümünü Sıfırla
                     </button>
                     <button class="danger-btn action-btn" onclick="tamamlananlariSil()">
-                         Tamamlananları Sil
+                        🗑️ Tamamlananları Sil
                     </button>
                 </div>
             </div>
@@ -444,7 +448,7 @@
             // İstatistik ekle
             listeHTML += `
                 <div class="liste-istatistik">
-                     Toplam ${toplam} ürün
+                    📊 Toplam ${toplam} ürün
                     ${tamamlananlar > 0 ? 
                         `<div class="tamamlanan-bilgi">✅ ${tamamlananlar} ürün tamamlandı</div>` : 
                         ''
