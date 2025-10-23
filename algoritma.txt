@@ -1,0 +1,8 @@
+1-Başlangıç.
+2-Kelimeye bak.
+3-Kelimenin ilk karakterine bak.
+4-Karakter "0" veya "," mü?
+5-evet ise alt satıra geç.
+6-değil ise karakteri bir atla.
+8-sonucu yazdır.
+9-Bitiş.

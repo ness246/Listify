@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listify.</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #170a27 0%, #170a27 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: #170a27;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #170a27, #170a27);
+            color: #ffffff;
+            padding: 25px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+
+        .content {
+            padding: 25px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        textarea {
+            width: 100%;
+            height: 120px;
+            padding: 15px;
+            border: 2px solid #171717;
+            border-radius: 10px;
+            font-size: 16px;
+            resize: vertical;
+            transition: border-color 0.3s;
+            background: #000000;
+            color: #ffffff;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #170a27;
+        }
+
+        .example {
+            background: #000000;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 8px;
+            font-size: 14px;
+            color: #7f7f7f;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        button {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .primary-btn {
+            background: #00563e;
+            color: white;
+        }
+
+        .primary-btn:hover {
+            background: #016b4d;
+            transform: translateY(2px);
+        }
+
+        .secondary-btn {
+            background: #3d0c01;
+            color: #ffffff;
+        }
+
+        .secondary-btn:hover {
+            background: #611301;
+            transform: translateY(2px);
+        }
+
+        .danger-btn {
+            background: #660001;
+            color: white;
+        }
+
+        .danger-btn:hover {
+            background: #860103;
+            transform: translateY(2px);
+        }
+
+        .liste-container {
+            background: #000000;
+            border-radius: 10px;
+            padding: 20px;
+            min-height: 100px;
+        }
+
+        .liste-baslik {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .liste-oge {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            background: #4c907d;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px #4c907d70;
+            animation: alternate 0.3s ease-in;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-left: 4px solid #c7060a;
+        }
+
+        .liste-oge:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 8px #ffffff48;
+        }
+
+        .liste-oge.tamamlandi {
+            background: #29453d;
+            border-left-color: #7e4646;
+            opacity: 0.7;
+        }
+
+        .oge-numarasi {
+            background: #c7060a;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            margin-right: 12px;
+            transition: all 0.3s;
+        }
+
+        .liste-oge.tamamlandi .oge-numarasi {
+            background: #7e4646;
+        }
+
+        .oge-metin {
+            color: #ffffff;
+            flex: 1;
+            font-size: 20px;
+            transition: all 0.3s;
+        }
+
+        .liste-oge.tamamlandi .oge-metin {
+            text-decoration: line-through;
+            color: #666;
+        }
+
+        .tik-isareti {
+            margin-left: 10px;
+            color: #00ff08;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .liste-oge.tamamlandi .tik-isareti {
+            opacity: 1;
+        }
+
+        .bos-liste {
+            text-align: center;
+            color: #7f7f7f;
+            font-style: italic;
+            padding: 20px;
+        }
+
+        .liste-istatistik {
+            text-align: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e0e0e0;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .tamamlanan-bilgi {
+            background: #e8f5e8;
+            color: #2d5a2d;
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-top: 10px;
+            font-size: 13px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes checkmark {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        /* Telefona uyumlu stiller */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                border-radius: 10px;
+            }
+            
+            .content {
+                padding: 20px 15px;
+            }
+            
+            button {
+                padding: 12px;
+                font-size: 14px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Listify.</h1>
+            <p>Düzen, Basitçe.</p>
+        </div>
+
+        <div class="content">
+            <div class="input-group">
+                <label for="urunInput">Ürünleri Yazın:</label>
+                <textarea 
+                    id="urunInput" 
+                    placeholder="Örnek: elma, süt, ekmek, yumurta, peynir, domates..."
+                ></textarea>
+                <div class="example">
+                    💡 İpucu: Ürünleri virgül (,) ile ayırarak yazın. Ürünlere tıklayarak işaretleyin!
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button class="primary-btn" onclick="listeyiOlustur()">
+                    Liste Oluştur
+                </button>
+                <button class="secondary-btn" onclick="listeyiTemizle()">
+                    🗑️ Temizle
+                </button>
+            </div>
+
+            <div class="liste-container">
+                <div class="liste-baslik">📋 Market Listeniz</div>
+                <div id="listeSonuc" class="bos-liste">
+                    Liste henüz oluşturulmadı...
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="secondary-btn action-btn" onclick="tumunuTemizle()">
+                        🔄 Tümünü Sıfırla
+                    </button>
+                    <button class="danger-btn action-btn" onclick="tamamlananlariSil()">
+                        🗑️ Tamamlananları Sil
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let mevcutUrunler = [];
+
+        function listeyiOlustur() {
+            const input = document.getElementById('urunInput').value.trim();
+            const listeSonuc = document.getElementById('listeSonuc');
+            
+            if (!input) {
+                listeSonuc.innerHTML = '<div class="bos-liste">❌ Lütfen ürün girin!</div>';
+                mevcutUrunler = [];
+                return;
+            }
+            
+            // Virgülle ayır, boşlukları temizle, boş elemanları filtrele
+            const urunler = input.split(',')
+                .map(urun => urun.trim())
+                .filter(urun => urun.length > 0);
+            
+            if (urunler.length === 0) {
+                listeSonuc.innerHTML = '<div class="bos-liste">❌ Geçerli ürün bulunamadı!</div>';
+                mevcutUrunler = [];
+                return;
+            }
+            
+            // Mevcut ürünleri güncelle (tıklama durumlarını koru)
+            const eskiUrunler = mevcutUrunler;
+            mevcutUrunler = urunler.map((urun, index) => {
+                // Eski listede bu ürün var mı kontrol et
+                const eskiUrun = eskiUrunler.find(e => e.isim === urun);
+                return {
+                    isim: urun,
+                    tamamlandi: eskiUrun ? eskiUrun.tamamlandi : false
+                };
+            });
+            
+            listeyiGoster();
+        }
+        
+        function listeyiGoster() {
+            const listeSonuc = document.getElementById('listeSonuc');
+            const tamamlananlar = mevcutUrunler.filter(urun => urun.tamamlandi).length;
+            const toplam = mevcutUrunler.length;
+            
+            if (toplam === 0) {
+                listeSonuc.innerHTML = '<div class="bos-liste">Liste henüz oluşturulmadı...</div>';
+                return;
+            }
+            
+            let listeHTML = '';
+            mevcutUrunler.forEach((urun, index) => {
+                const tamamlandiClass = urun.tamamlandi ? 'tamamlandi' : '';
+                listeHTML += `
+                    <div class="liste-oge ${tamamlandiClass}" onclick="urunToggle(${index})">
+                        <div class="oge-numarasi">${index + 1}</div>
+                        <div class="oge-metin">${urun.isim}</div>
+                        <div class="tik-isareti">✓</div>
+                    </div>
+                `;
+            });
+            
+            // İstatistik ekle
+            listeHTML += `
+                <div class="liste-istatistik">
+                    📊 Toplam ${toplam} ürün
+                    ${tamamlananlar > 0 ? 
+                        `<div class="tamamlanan-bilgi">✅ ${tamamlananlar} ürün tamamlandı</div>` : 
+                        ''
+                    }
+                </div>
+            `;
+            
+            listeSonuc.innerHTML = listeHTML;
+        }
+        
+        function urunToggle(index) {
+            mevcutUrunler[index].tamamlandi = !mevcutUrunler[index].tamamlandi;
+            listeyiGoster();
+        }
+        
+        function listeyiTemizle() {
+            document.getElementById('urunInput').value = '';
+            mevcutUrunler = [];
+            listeyiGoster();
+        }
+        
+        function tumunuTemizle() {
+            // Tüm ürünlerin tıklama durumunu sıfırla
+            mevcutUrunler.forEach(urun => urun.tamamlandi = false);
+            listeyiGoster();
+        }
+        
+        function tamamlananlariSil() {
+            // Sadece tamamlanmamış ürünleri tut
+            mevcutUrunler = mevcutUrunler.filter(urun => !urun.tamamlandi);
+            
+            // Input'u da güncelle
+            const yeniInput = mevcutUrunler.map(urun => urun.isim).join(', ');
+            document.getElementById('urunInput').value = yeniInput;
+            
+            listeyiGoster();
+        }
+        
+        // Klavye kısayolları
+        document.getElementById('urunInput').addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'Enter') {
+                listeyiOlustur();
+            }
+        });
+        
+        // Sayfa yüklendiğinde inputa odaklan
+        window.onload = function() {
+            document.getElementById('urunInput').focus();
+        };
+    </script>
+</body>
+</html>
