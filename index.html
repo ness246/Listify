@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listify.</title>
+    <title>LISTIFY.</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit&family=Bebas+Neue&display=swap" rel="stylesheet">
+    
     <style>
         * {
             margin: 0;
@@ -12,10 +18,12 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Kanit', sans-serif;
             background: linear-gradient(135deg, #170a27 0%, #170a27 100%);
             min-height: 100vh;
             padding: 20px;
+            line-height: 1.6;
+            font-weight: 400;
         }
 
         .container {
@@ -32,16 +40,23 @@
             color: #ffffff;
             padding: 25px 20px;
             text-align: center;
+            border-bottom: 1px solid #2d1b4e;
         }
 
         .header h1 {
-            font-size: 24px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 70px;
             margin-bottom: 5px;
+            letter-spacing: 2px;
+            font-weight: 400;
         }
 
         .header p {
+            font-family: 'Bebas Neue', sans-serif;
             opacity: 0.9;
-            font-size: 14px;
+            font-size: 18px;
+            font-weight: 400;
+            letter-spacing: 1px;
         }
 
         .content {
@@ -55,26 +70,34 @@
         label {
             display: block;
             margin-bottom: 8px;
-            font-weight: 600;
+            font-weight: 500;
             color: #ffffff;
+            font-size: 16px;
         }
 
         textarea {
             width: 100%;
             height: 120px;
             padding: 15px;
-            border: 2px solid #171717;
+            border: 2px solid #2d1b4e;
             border-radius: 10px;
             font-size: 16px;
             resize: vertical;
-            transition: border-color 0.3s;
-            background: #000000;
+            transition: all 0.3s;
+            background: #1a1a1a;
             color: #ffffff;
+            font-family: 'Kanit', sans-serif;
         }
 
         textarea:focus {
             outline: none;
-            border-color: #170a27;
+            border-color: #4c907d;
+            background: #2d1b4e;
+        }
+
+        textarea::placeholder {
+            color: #7f7f7f;
+            opacity: 0.7;
         }
 
         .example {
@@ -83,7 +106,9 @@
             border-radius: 8px;
             margin-top: 8px;
             font-size: 14px;
-            color: #7f7f7f;
+            color: #b8b8b8;
+            border: 1px solid #000000;
+            font-weight: 300;
         }
 
         .button-group {
@@ -98,9 +123,10 @@
             border: none;
             border-radius: 10px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
             transition: all 0.3s;
+            font-family: 'Kanit', sans-serif;
         }
 
         .primary-btn {
@@ -110,17 +136,17 @@
 
         .primary-btn:hover {
             background: #016b4d;
-            transform: translateY(2px);
+            transform: translateY(-2px);
         }
 
         .secondary-btn {
-            background: #3d0c01;
+            background: #611301;
             color: #ffffff;
         }
 
         .secondary-btn:hover {
-            background: #611301;
-            transform: translateY(2px);
+            background: #861a02;
+            transform: translateY(-2px);
         }
 
         .danger-btn {
@@ -130,7 +156,7 @@
 
         .danger-btn:hover {
             background: #860103;
-            transform: translateY(2px);
+            transform: translateY(-2px);
         }
 
         .liste-container {
@@ -138,6 +164,7 @@
             border-radius: 10px;
             padding: 20px;
             min-height: 100px;
+            border: 1px solid #2d1b4e;
         }
 
         .liste-baslik {
@@ -145,17 +172,18 @@
             margin-bottom: 15px;
             color: #ffffff;
             font-weight: 600;
+            font-size: 18px;
         }
 
         .liste-oge {
             display: flex;
             align-items: center;
             padding: 12px;
-            background: #4c907d;
+            background: #037253;
             margin-bottom: 8px;
             border-radius: 8px;
-            box-shadow: 0 2px 5px #4c907d70;
-            animation: alternate 0.3s ease-in;
+            box-shadow: 0 2px 5px #4c907d00;
+            animation: fadeIn 0.3s ease-in;
             cursor: pointer;
             transition: all 0.3s;
             border-left: 4px solid #c7060a;
@@ -185,6 +213,7 @@
             font-weight: bold;
             margin-right: 12px;
             transition: all 0.3s;
+            font-family: 'Kanit', sans-serif;
         }
 
         .liste-oge.tamamlandi .oge-numarasi {
@@ -194,13 +223,14 @@
         .oge-metin {
             color: #ffffff;
             flex: 1;
-            font-size: 20px;
+            font-size: 16px;
             transition: all 0.3s;
+            font-weight: 400;
         }
 
         .liste-oge.tamamlandi .oge-metin {
             text-decoration: line-through;
-            color: #666;
+            color: #b8b8b8;
         }
 
         .tik-isareti {
@@ -209,6 +239,7 @@
             font-weight: bold;
             opacity: 0;
             transition: opacity 0.3s;
+            font-size: 18px;
         }
 
         .liste-oge.tamamlandi .tik-isareti {
@@ -220,24 +251,27 @@
             color: #7f7f7f;
             font-style: italic;
             padding: 20px;
+            font-weight: 300;
         }
 
         .liste-istatistik {
             text-align: center;
             margin-top: 15px;
             padding-top: 15px;
-            border-top: 1px solid #e0e0e0;
-            color: #666;
+            border-top: 1px solid #2d1b4e;
+            color: #b8b8b8;
             font-size: 14px;
+            font-weight: 300;
         }
 
         .tamamlanan-bilgi {
-            background: #e8f5e8;
-            color: #2d5a2d;
+            background: #1a3a2e;
+            color: #4caf7d;
             padding: 8px 12px;
             border-radius: 6px;
             margin-top: 10px;
             font-size: 13px;
+            font-weight: 400;
         }
 
         .action-buttons {
@@ -250,6 +284,7 @@
             flex: 1;
             padding: 10px;
             font-size: 14px;
+            font-weight: 500;
         }
 
         @keyframes fadeIn {
@@ -285,13 +320,25 @@
             .action-buttons {
                 flex-direction: column;
             }
+            
+            .header h1 {
+                font-size: 42;
+            }
+            
+            .header p {
+                font-size: 16px;
+            }
+            
+            textarea {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>Listify.</h1>
+            <h1>Lıstıfy.</h1>
             <p>Düzen, Basitçe.</p>
         </div>
 
@@ -312,22 +359,22 @@
                     Liste Oluştur
                 </button>
                 <button class="secondary-btn" onclick="listeyiTemizle()">
-                    🗑️ Temizle
+                     Temizle
                 </button>
             </div>
 
             <div class="liste-container">
-                <div class="liste-baslik">📋 Market Listeniz</div>
+                <div class="liste-baslik"> Market Listeniz</div>
                 <div id="listeSonuc" class="bos-liste">
                     Liste henüz oluşturulmadı...
                 </div>
                 
                 <div class="action-buttons">
                     <button class="secondary-btn action-btn" onclick="tumunuTemizle()">
-                        🔄 Tümünü Sıfırla
+                         Tümünü Sıfırla
                     </button>
                     <button class="danger-btn action-btn" onclick="tamamlananlariSil()">
-                        🗑️ Tamamlananları Sil
+                         Tamamlananları Sil
                     </button>
                 </div>
             </div>
@@ -397,7 +444,7 @@
             // İstatistik ekle
             listeHTML += `
                 <div class="liste-istatistik">
-                    📊 Toplam ${toplam} ürün
+                     Toplam ${toplam} ürün
                     ${tamamlananlar > 0 ? 
                         `<div class="tamamlanan-bilgi">✅ ${tamamlananlar} ürün tamamlandı</div>` : 
                         ''
