@@ -83,8 +83,7 @@ Bir hata bulduysanız lütfen issues kısmından bildirin.
 Bu proje MIT lisansı altında lisanslanmıştır - detaylar için LICENSE dosyasına bakın.
 
 ## 👨‍💻 Geliştirici
-
-**İsminiz**  
+ 
 - GitHub: [@ness246](https://github.com/ness246)
 
 ---
